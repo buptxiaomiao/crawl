@@ -2,9 +2,9 @@
 import scrapy
 
 
-class ExampleSpider(scrapy.Spider):
-    name = 'baidu'
-    allowed_domains = ['baidu.com']
+class DemoSpider(scrapy.Spider):
+    name = 'demo'
+    allowed_domains = ['ailab.cn']
     start_urls = ['http://tech.ailab.cn/article-88209.html']
 
     def parse(self, response):

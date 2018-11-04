@@ -4,13 +4,20 @@ import fire
 from scrapy import cmdline
 
 
-def start(spider_name=None):
-    if not spider_name:
-        print 'please input spider name.'
-        return
-    a = 'scrapy crawl {}'.format(spider_name).split()
-    cmdline.execute(a)
+class App(object):
+
+    @classmethod
+    def __start(cls, name):
+        if not name:
+            print 'please input spider name.'
+            return
+        cmd = 'scrapy crawl {}'.format(name).split()
+        cmdline.execute(cmd)
+
+    @classmethod
+    def demo(cls):
+        return cls.__start('demo')
 
 
 if __name__ == '__main__':
-    fire.Fire(start)
+    fire.Fire(App)
