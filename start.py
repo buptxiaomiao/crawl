@@ -8,9 +8,6 @@ class App(object):
 
     @classmethod
     def __start(cls, name):
-        if not name:
-            print 'please input spider name.'
-            return
         cmd = 'scrapy crawl {}'.format(name).split()
         cmdline.execute(cmd)
 
