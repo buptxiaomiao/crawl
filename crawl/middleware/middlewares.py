@@ -6,6 +6,8 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.http import HtmlResponse
+from selenium import webdriver
 
 
 class CrawlSpiderMiddleware(object):
@@ -77,10 +79,24 @@ class CrawlDownloaderMiddleware(object):
         # - or return a Response object
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
-        #   installed downloader middleware will be called
-        print request
+        #   installed downloader middlewares will be called
 
-        return None
+        # options = """http://www.mamicode.com/info-detail-1692070.html"""# 启动时设置默认语言为中文 UTF-8
+        # from selenium import webdriver
+        # options = webdriver.ChromeOptions()
+        # options.add_argument(‘lang=zh_CN.UTF-8‘)
+        # driver = webdriver.Chrome(chrome_options = options)
+        driver = webdriver.Chrome()
+        driver.get(request.url)
+        import time
+        time.sleep(3)
+
+        return HtmlResponse(url=request.url,
+                            body=driver.page_source,
+                            request=request,
+                            # 最好根据网页的具体编码而定
+                            encoding='utf-8',
+                            status=200)
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
