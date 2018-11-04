@@ -1,0 +1,13 @@
+
+    allowed_domains = ['w3school.com.cn']
+
+setting 中深度
+
+
+from scrapy.http import Request
+from scrapy.spidermiddlewares.offsite import OffsiteMiddleware
+
+
+
+
+    #     urls = response.xpath('//ul/li/a/@href').extract()
