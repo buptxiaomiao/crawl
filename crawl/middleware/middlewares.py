@@ -84,17 +84,26 @@ class CrawlDownloaderMiddleware(object):
         # options = """http://www.mamicode.com/info-detail-1692070.html"""# 启动时设置默认语言为中文 UTF-8
         # from selenium import webdriver
         # options = webdriver.ChromeOptions()
-        # options.add_argument(‘lang=zh_CN.UTF-8‘)
-        # driver = webdriver.Chrome(chrome_options = options)
-        driver = webdriver.Chrome()
+        # options.add_argument('--headless')
+        # options.add_argument('--disable-gpu')
+        # options.add_argument('lang=zh_CN.UTF-8')
+        # from crawl.utils.const import CONST
+        # ag = "user-agent='{}'".format(CONST.user_agent_list[0])
+        # options.add_argument(ag)
+        # driver = webdriver.Chrome(chrome_options=options)
+        # driver.get(request.url)
+        # import time
+        # time.sleep(3)
+        # page_source = driver.page_source
+        # driver.quit()
+        if not hasattr(spider, 'use_driver') or not hasattr(spider, 'driver'):
+            return
+        # 线程池
+        driver = spider.driver
         driver.get(request.url)
-        import time
-        time.sleep(3)
-
         return HtmlResponse(url=request.url,
                             body=driver.page_source,
                             request=request,
-                            # 最好根据网页的具体编码而定
                             encoding='utf-8',
                             status=200)
 

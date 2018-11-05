@@ -26,7 +26,7 @@ ROBOTSTXT_OBEY = False
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'crawl.middlewares.middleware.CrawlDownloaderMiddleware': 543,
+   'crawl.middleware.middlewares.CrawlDownloaderMiddleware': 543,
 }
 
 
